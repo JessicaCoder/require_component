@@ -1,0 +1,23 @@
+{
+  "name": "require_component",
+  "version": "1.0.0",
+  "description": "这是学习http://www.imooc.com/learn/99的一个小demo",
+  "main": "index.js",
+  "dependencies": {
+    "requirejs": "^2.3.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jessicatt/require_component.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jessicatt/require_component/issues"
+  },
+  "homepage": "https://github.com/Jessicatt/require_component#readme"
+}
