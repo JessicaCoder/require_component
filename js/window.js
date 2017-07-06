@@ -11,7 +11,9 @@ define(['jquery'], function($) {
 			handlerCloseBtn:null,
 			hasMask:true,
 			hasCloseBtn:false,
-			skinClassName:null
+			isDraggable:true,			
+			skinClassName:null,
+			dragHandle:null
 		};
 	}
 
@@ -48,7 +50,13 @@ define(['jquery'], function($) {
 			if(CFG.skinClassName){
 				boundingBox.addClass(CFG.skinClassName);
 			}
-			
+			if(CFG.isDraggable){
+				if (CFG.dragHandle) {
+					boundingBox.draggable({handle:CFG.dragHandle});
+				} else{
+					boundingBox.draggable();
+				}
+			}
 			btn.click(function(){
 				CFG.handlerAlertBtn&&CFG.handlerAlertBtn();
 				boundingBox.remove();

@@ -1,10 +1,11 @@
 require.config({
 	paths:{
-		jquery:'jquery-3.1.0'
+		jquery:'jquery-3.1.0',
+		jqueryUI:'https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui'
 	}
 })
 
-require(['jquery','window'],function($,w){
+require(['jquery','window','jqueryUI'],function($,w,$UI){
 	$("#trigger-alert").on("click",function(){
 		new w.Window().alert({
 			title:"提示",
@@ -17,6 +18,7 @@ require(['jquery','window'],function($,w){
 			y:50,
 			textAlertBtn:"确定按钮",
 			hasCloseBtn:true,
+			dragHandle:'.window_header',
 			skinClassName:"window_skin_a",
 			handlerAlertBtn:function(){
 				alert("you click the alert button");
