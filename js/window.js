@@ -15,9 +15,28 @@ define(['jquery'], function($) {
 			skinClassName:null,
 			dragHandle:null
 		};
+		this.handlers={}
 	}
 
 	Window.prototype = {
+		on:function(type,handler){
+			console.log(type)
+			console.log(handler)
+			
+			if(typeof this.handlers[type]=='undefined'){
+				this.handlers[type]=[];
+			}
+			this.handlers[type].push(handler);
+			console.log(this.handlers)
+		},
+		fire:function(type,data){
+			if(this.handlers[type] instanceof Array){
+				var handlers = this.handlers[type];
+				for (var i=0,len=handlers.length;i<len;i++) {
+					handlers[i](data);
+				}
+			}
+		},
 		alert: function(cfg) {
 			var CFG = $.extend({},this.cfg, cfg);
 			var boundingBox = $('<div class="window_boundingBox">' +
@@ -31,15 +50,16 @@ define(['jquery'], function($) {
 				width:CFG.width+"px",
 				height:CFG.height+"px",
 				left:(CFG.x||(window.innerWidth-CFG.width)/2)+"px",
-				top:(CFG.x||(window.innerWidth-CFG.width)/2)+"px"
+				top:(CFG.x||(window.innerHeight-CFG.height)/2)+"px"
 			});
 			if(CFG.hasCloseBtn){
 				var closeBtn = $("<span class='window_closeBtn'>x</span>");
 				closeBtn.appendTo(boundingBox);
 				closeBtn.click(function(){
 					boundingBox.remove();
-					CFG.handlerCloseBtn&&CFG.handlerCloseBtn();
+//					CFG.handlerCloseBtn&&CFG.handlerCloseBtn();
 					mask&&mask.remove();
+					that.fire('close');
 				});
 			}
 			mask=null;
@@ -57,13 +77,20 @@ define(['jquery'], function($) {
 					boundingBox.draggable();
 				}
 			}
+			if(CFG.handlerAlertBtn){
+				this.on("alert",CFG.handlerAlertBtn);
+			}
+			if(CFG.handlerCloseBtn){
+				this.on("close",CFG.handlerCloseBtn);
+			}
 			btn.click(function(){
-				CFG.handlerAlertBtn&&CFG.handlerAlertBtn();
+//				CFG.handlerAlertBtn&&CFG.handlerAlertBtn();
 				boundingBox.remove();
 				mask&&mask.remove();
-				
+				that.fire('alert');
 			});
-			
+			that = this;
+			console.log(that);
 		},
 		confirm: function() {},
 		prompt: function() {}

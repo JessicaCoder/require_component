@@ -7,7 +7,8 @@ require.config({
 
 require(['jquery','window','jqueryUI'],function($,w,$UI){
 	$("#trigger-alert").on("click",function(){
-		new w.Window().alert({
+		var win =new w.Window();
+		win.alert({
 			title:"提示",
 			content:'welcome!',
 			handler:function(){
@@ -28,5 +29,17 @@ require(['jquery','window','jqueryUI'],function($,w,$UI){
 				
 			}
 		});
+		
+		win.on('alert',function(){
+			alert("the second alert handler");
+		});
+		win.on('alert',function(){
+			alert("the third alert handler");
+		});
+		win.on('close',function(){
+			alert("the second close handler");
+		});
+		
+		
 	});
 })
