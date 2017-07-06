@@ -17,7 +17,11 @@ define(['jquery'], function($) {
 		};
 		this.handlers={}
 	}
-
+/**
+ * 观察者模式
+ * 跳出原生事件的限制，提高封装的抽象层级
+ * 连缀语法：增加 return this;
+ */
 	Window.prototype = {
 		on:function(type,handler){
 			console.log(type)
@@ -28,6 +32,7 @@ define(['jquery'], function($) {
 			}
 			this.handlers[type].push(handler);
 			console.log(this.handlers)
+			return this;
 		},
 		fire:function(type,data){
 			if(this.handlers[type] instanceof Array){
@@ -57,8 +62,8 @@ define(['jquery'], function($) {
 				closeBtn.appendTo(boundingBox);
 				closeBtn.click(function(){
 					boundingBox.remove();
-//					CFG.handlerCloseBtn&&CFG.handlerCloseBtn();
 					mask&&mask.remove();
+//					CFG.handlerCloseBtn&&CFG.handlerCloseBtn();
 					that.fire('close');
 				});
 			}
@@ -91,6 +96,7 @@ define(['jquery'], function($) {
 			});
 			that = this;
 			console.log(that);
+			return this;
 		},
 		confirm: function() {},
 		prompt: function() {}

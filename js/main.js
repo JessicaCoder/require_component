@@ -28,17 +28,23 @@ require(['jquery','window','jqueryUI'],function($,w,$UI){
 				alert("you click the close button");
 				
 			}
-		});
-		
-		win.on('alert',function(){
+		}).on('alert',function(){
 			alert("the second alert handler");
-		});
-		win.on('alert',function(){
+		}).on('alert',function(){
 			alert("the third alert handler");
-		});
-		win.on('close',function(){
+		}).on('close',function(){
 			alert("the second close handler");
 		});
+		
+//		win.on('alert',function(){
+//			alert("the second alert handler");
+//		});
+//		win.on('alert',function(){
+//			alert("the third alert handler");
+//		});
+//		win.on('close',function(){
+//			alert("the second close handler");
+//		});
 		
 		
 	});
