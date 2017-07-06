@@ -8,9 +8,7 @@ define(function(){
 	function Widget(){
 		this.handlers = {};
 	}
-	function TableView(){
-//		this.handlers = {};
-	}
+
 	
 	Widget.prototype={
 		on:function(type,handler){
@@ -31,14 +29,25 @@ define(function(){
 					handlers[i](data);
 				}
 			}
-		}
+		},
+		render:function(container){
+			this.renderUI();//dom渲染
+			this.handlers = {}; //事件清空
+			this.bindUI(); //事件绑定
+			this.syncUI(); //css渲染
+			$(container||document.body).append(this.boundingBox);
+		},
+		destory:function(){
+			this.destructor();
+			this.boundingBox.off();
+			this.boundingBox.remove();
+		},
+		renderUI:function(){},
+		bindUI:function(){},
+		syncUI:function(){},
+		destructor:function(){}
 	}
 	
-	TableView.prototype=$.extend({},new widget.Widget(),{
-		someMethod:function(cfg){
-			
-		}
-	});
 	return {
 		Widget:Widget
 	}
