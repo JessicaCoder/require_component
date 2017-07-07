@@ -12,8 +12,8 @@ define(function(){
 	
 	Widget.prototype={
 		on:function(type,handler){
-			console.log(type)
-			console.log(handler)
+//			console.log(type)
+//			console.log(handler)
 			
 			if(typeof this.handlers[type]=='undefined'){
 				this.handlers[type]=[];
