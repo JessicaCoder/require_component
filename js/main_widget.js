@@ -85,9 +85,42 @@ require(['jquery','window_widget','jqueryUI'],function($,w,$UI){
 		}).on('close',function(){
 			alert("the second close handler");
 		});
-		
-//		win.on("confirm",function(){
-//			alert(123)
-//		})
 	});
+	$("#c").on("click",function(){
+		var win =new w.Window();
+//		prompt()弹框调用
+		
+		win.prompt({
+			title:"请输入你的名字",
+			content:'我们将为您的信息保密。',
+			width:300,
+			height:'auto',
+			y:50,
+			textPromptBtn:"输入",
+			textCancelBtn:"取消",
+			dragHandle:'.window_header',
+			handlerPromptBtn:function(inputValue){
+				alert("您输入的内容是："+inputValue);
+			},
+			handlerCancelBtn:function(){
+				alert("you click the cancel button");
+			}
+		}).on('confirm',function(){
+			alert("the second click confimBtn");
+		}).on('cancel',function(){
+			alert("the second click cancelBtn");
+		}).on('close',function(){
+			alert("the second close handler");
+		});
+	});
+	$("#d").on("click",function(){
+		new w.Window().common({
+			content:"这是一个通用窗体",
+			width:500,
+			height:300,
+			y:50,
+			hasCloseBtn:true
+		});
+	});
+	
 })
